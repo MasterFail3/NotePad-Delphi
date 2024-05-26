@@ -1,0 +1,66 @@
+object Form1: TForm1
+  Left = 2837
+  Height = 600
+  Top = 144
+  Width = 800
+  Caption = 'Form1'
+  ClientHeight = 600
+  ClientWidth = 800
+  OnCreate = OnCreate
+  LCLVersion = '3.2.0.0'
+  object ButtonNew: TButton
+    Left = 24
+    Height = 25
+    Top = 16
+    Width = 106
+    AutoSize = True
+    Caption = 'Новая заметка'
+    TabOrder = 0
+    OnClick = ButtonNewClick
+  end
+  object TextBox: TMemo
+    Left = 231
+    Height = 528
+    Top = 56
+    Width = 553
+    Lines.Strings = (
+      'TextBox'
+    )
+    TabOrder = 1
+  end
+  object FileBox: TListBox
+    Left = 24
+    Height = 504
+    Top = 80
+    Width = 196
+    Columns = 1
+    ItemHeight = 0
+    TabOrder = 2
+  end
+  object ButtonSave: TButton
+    Left = 136
+    Height = 25
+    Top = 16
+    Width = 131
+    AutoSize = True
+    Caption = 'Сохранить заметку'
+    TabOrder = 3
+    OnClick = ButtonSaveClick
+  end
+  object ButtonDelete: TButton
+    Left = 272
+    Height = 25
+    Top = 16
+    Width = 120
+    Caption = 'Удалить заметку'
+    TabOrder = 4
+    OnClick = ButtonDeleteClick
+  end
+  object Label1: TLabel
+    Left = 24
+    Height = 15
+    Top = 56
+    Width = 102
+    Caption = 'Доступные файлы'
+  end
+end

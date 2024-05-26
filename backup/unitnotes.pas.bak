@@ -1,0 +1,89 @@
+unit unitNotes;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+
+type
+
+  { TForm1 }
+
+  TForm1 = class(TForm)
+    ButtonNew: TButton;
+    ButtonSave: TButton;
+    ButtonDelete: TButton;
+    FileBox: TListBox;
+    Label1: TLabel;
+    TextBox: TMemo;
+    procedure ButtonDeleteClick(Sender: TObject);
+    procedure ButtonNewClick(Sender: TObject);
+    procedure ButtonSaveClick(Sender: TObject);
+    procedure OnCreate(Sender: TObject);
+
+
+  private
+
+  public
+
+  end;
+
+var
+  MainWindow: TForm1;
+
+  searchResult: TSearchRec;
+  fileName: String;
+  flag: Boolean;
+
+
+implementation
+
+{$R *.lfm}
+
+{ TForm1 }
+
+procedure TForm1.OnCreate(Sender: TObject);
+begin
+     ChDir('Notes');
+     if FindFirst('Notes/*.note', faAnyFile, searchResult) = 0 then
+     begin
+       repeat
+           FileBox.Items.Add(searchResult.Name);
+       until FindNext(searchResult)<>0;
+       FindClose(searchResult);
+     end
+     else //FileBox.Count = 0 then
+     begin
+       FileBox.Items.Add('Новая заметка');
+
+     end;
+end;
+
+procedure TForm1.ButtonSaveClick(Sender: TObject);
+begin
+   repeat
+   if not InputQuery('Сохранить заметку', 'Введите название заметки', fileName) then exit;
+   if (FileBox.Items.IndexOf(fileName) > -1)then
+   ShowMessage('Такой файл уже существует');
+   until(not FileBox.Items.IndexOf(fileName) > -1);
+   FileBox.Items.Add(fileName);
+
+
+end;
+
+procedure TForm1.ButtonNewClick(Sender: TObject);
+begin
+   FileBox.Items.Add('Новая заметка');
+end;
+
+procedure TForm1.ButtonDeleteClick(Sender: TObject);
+begin
+   FileBox.DeleteSelected;
+
+
+end;
+
+end.
+
